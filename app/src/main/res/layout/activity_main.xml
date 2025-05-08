@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f9faf4">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="250dp"
+        android:layout_height="170dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:contentDescription="Restaurant logo"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="7dp"
+        android:text="AL FAREED RESTUARANT"
+        android:fontFamily="cursive"
+        android:textColor="#fb8500"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/app_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="Deliever Favorite Food"
+        android:fontFamily="cursive"
+        android:textColor="#fb8500"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tagline"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="Login To Your Account"
+        android:textColor="#fb8500"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!-- Email field with icon positioned relatively -->
+    <RelativeLayout
+        android:id="@+id/email_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_title"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp">
+
+        <ImageView
+            android:id="@+id/emailicon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="Email icon"
+            app:srcCompat="@drawable/email_icon" />
+
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/rounded_edittext_background"
+            android:hint="Enter your Email "
+            android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textColorHint="#BDBDBD"
+            android:importantForAutofill="yes"
+            android:autofillHints="emailAddress" />
+    </RelativeLayout>
+
+    <!-- Password field with icon and show/hide button -->
+    <RelativeLayout
+        android:id="@+id/password_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/email_container"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="30dp">
+
+        <ImageView
+            android:id="@+id/passwordicon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="Password icon"
+            app:srcCompat="@drawable/password_icon" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/rounded_edittext_background"
+            android:hint="Enter your Password"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:paddingEnd="48dp"
+            android:paddingRight="48dp"
+            android:textColor="@color/black"
+            android:textColorHint="#BDBDBD"
+            android:importantForAutofill="yes"
+            android:autofillHints="password" />
+
+        <ImageButton
+            android:id="@+id/btn_show_password"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Show Password"
+            android:padding="10dp"
+            android:src="@drawable/closedeyeicon" />
+    </RelativeLayout>
+
+    <!-- "or continue with" text -->
+    <TextView
+        android:id="@+id/tv_or_continue_with"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password_container"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="or continue with"
+        android:textColor="#fb8500"
+        android:textSize="16sp" />
+
+    <!-- Google sign-in button with improved touch target -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_google_signin"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/tv_or_continue_with"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:contentDescription="Sign in with Google">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp"
+            android:background="#fff">
+
+            <ImageView
+                android:id="@+id/google_icon"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="Google icon"
+                app:srcCompat="@drawable/googleicon" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Login Button with improved touch target -->
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@+id/btn_google_signin"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#023047"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Log In"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:minHeight="48dp"
+        android:gravity="center"
+        android:onClick="goToSignUp"
+        android:padding="8dp"
+        android:text="Don't Have Account?"
+        android:textColor="#fb8500"
+        android:textSize="17sp" />
+
+</RelativeLayout>

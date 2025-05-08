@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "378221177394",
+    "project_id": "restuarant-425c7",
+    "storage_bucket": "restuarant-425c7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378221177394:android:366ca2685384674a956a2b",
+        "android_client_info": {
+          "package_name": "com.example.alfareed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378221177394-4d46rd04rh3d2jph3ur6gl1tk9q3qhsv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.alfareed",
+            "certificate_hash": "b354faec0620c5843e2945af3cf67dd7957a91fa"
+          }
+        },
+        {
+          "client_id": "378221177394-ujl85oltegrbkhkblnf9kf07meo5h3d0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQk6q8GxjjvoUQeSDxM5olPVbthU67Qw0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378221177394-ujl85oltegrbkhkblnf9kf07meo5h3d0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

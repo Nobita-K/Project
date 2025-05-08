@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f9faf4">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/main"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:cardCornerRadius="22dp"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="User information form">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:clipToPadding="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="17dp"
+                android:background="#fff">
+
+                <!-- Title -->
+                <TextView
+                    android:id="@+id/info_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="24dp"
+                    android:text="Your Info."
+                    android:textColor="#fb8500"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Name Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    android:baselineAligned="false">
+
+                    <TextView
+                        android:id="@+id/uname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:text="Name"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:labelFor="@+id/username"
+                        android:minWidth="80dp" />
+
+                    <EditText
+                        android:id="@+id/username"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_edittext_background"
+                        android:hint=" Your Name"
+                        android:textColor="@color/black"
+                        android:padding="15dp"
+                        android:textColorHint="#BDBDBD"
+                        android:textSize="16sp"
+                        android:importantForAutofill="yes"
+                        android:autofillHints="name"
+                        android:inputType="textPersonName" />
+                </LinearLayout>
+
+                <!-- Email Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    android:baselineAligned="false">
+
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:text="Email"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:labelFor="@+id/useremail"
+                        android:minWidth="80dp" />
+
+                    <EditText
+                        android:id="@+id/useremail"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_edittext_background"
+                        android:hint="steeve@gmail.com"
+                        android:textColor="@color/black"
+                        android:padding="15dp"
+                        android:textColorHint="#BDBDBD"
+                        android:textSize="16sp"
+                        android:importantForAutofill="yes"
+                        android:autofillHints="emailAddress"
+                        android:inputType="textEmailAddress" />
+                </LinearLayout>
+
+                <!-- Phone Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    android:baselineAligned="false">
+
+                    <TextView
+                        android:id="@+id/phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:text="Phone"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:labelFor="@+id/userphone"
+                        android:minWidth="80dp" />
+
+                    <EditText
+                        android:id="@+id/userphone"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_edittext_background"
+                        android:hint="+923179867957"
+                        android:textColor="@color/black"
+                        android:padding="15dp"
+                        android:textColorHint="#BDBDBD"
+                        android:textSize="16sp"
+                        android:importantForAutofill="yes"
+                        android:autofillHints="phone"
+                        android:inputType="phone" />
+                </LinearLayout>
+
+                <!-- Password Row with Eye Icon -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:baselineAligned="false">
+
+                    <TextView
+                        android:id="@+id/password"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="Password"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:labelFor="@+id/userpassword"
+                        android:minWidth="80dp" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/userpassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/rounded_edittext_background"
+                            android:inputType="textPassword"
+                            android:hint="............"
+                            android:textColor="@color/black"
+                            android:padding="15dp"
+                            android:textColorHint="#BDBDBD"
+                            android:textSize="16sp"
+                            android:importantForAutofill="yes"
+                            android:autofillHints="password" />
+
+                        <ImageButton
+                            android:id="@+id/show_password_button"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/hideeyeicon"
+                            android:contentDescription="Show/Hide Password"
+                            android:padding="12dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <!-- Action Buttons with better touch targets -->
+                <Button
+                    android:id="@+id/save_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:backgroundTint="#57B9FF"
+                    android:text="Save Information"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:paddingHorizontal="16dp" />
+
+                <Button
+                    android:id="@+id/feedback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:backgroundTint="#088F8F"
+                    android:text="Give Feedback ?"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:paddingHorizontal="16dp" />
+
+                <Button
+                    android:id="@+id/logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:backgroundTint="#C41E3A"
+                    android:text="Logout"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginBottom="8dp"
+                    android:layout_gravity="end"
+                    android:minWidth="120dp" />
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="4dp"
+        android:background="@color/orange"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="50dp"
+        app:itemIconTint="#fff"
+        app:itemTextColor="#fff"
+        app:itemIconSize="24dp"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

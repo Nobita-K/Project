@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="orange">#fb8500</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#9E9E9E</color>
+    <color name="price_color">#E23744</color>
+    <color name="red_accent">#E23744</color>
+    <color name="light_background">#F5F5F5</color>
+    <color name="icon_color">#616161</color>
+
+
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#D92929" />
+    <!-- You would need to create a pattern drawable with food icons.
+         For a real implementation, you might want to use a bitmap or vector drawable with a pattern -->
+</shape>
