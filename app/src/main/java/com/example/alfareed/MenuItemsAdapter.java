@@ -47,11 +47,15 @@ public class MenuItemsAdapter extends RecyclerView.Adapter<MenuItemsAdapter.Menu
         holder.itemPriceTextView.setText("Rs " + menuItem.getPrice());
         holder.itemDescriptionTextView.setText(menuItem.getDescription());
 
-        // Fetch image by imageId from SQLite
+        // Defensive image loading from SQLite using imageId
         byte[] image = imageDatabaseHelper.getImage(menuItem.getImageId());
         if (image != null && image.length > 0) {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-            holder.itemImageView.setImageBitmap(bitmap);
+            try {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+                holder.itemImageView.setImageBitmap(bitmap);
+            } catch (Exception e) {
+                holder.itemImageView.setImageResource(R.drawable.placeholder_image);
+            }
         } else {
             holder.itemImageView.setImageResource(R.drawable.placeholder_image);
         }

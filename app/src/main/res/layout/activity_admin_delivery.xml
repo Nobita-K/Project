@@ -42,8 +42,8 @@
     <!-- Back Button with improved touch target -->
     <ImageButton
         android:id="@+id/backButton"
-        android:layout_width="75dp"
-        android:layout_height="59dp"
+        android:layout_width="55dp"
+        android:layout_height="81dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="Back"
         android:padding="12dp"
@@ -60,7 +60,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:autoSizeMaxTextSize="22sp"
         android:autoSizeMinTextSize="18sp"
         android:autoSizeStepGranularity="1sp"

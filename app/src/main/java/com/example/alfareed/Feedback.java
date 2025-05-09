@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -20,6 +22,7 @@ public class Feedback extends AppCompatActivity {
     private EditText feedbackEditText;
     private Button sendButton;
     private String userName = "";
+    private TextView feedbackDisplayTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +36,11 @@ public class Feedback extends AppCompatActivity {
         });
 
         ImageView backArrow = findViewById(R.id.imageBack);
-        backArrow.setOnClickListener(v -> onBackPressed());
+        backArrow.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
         feedbackEditText = findViewById(R.id.editTextFeedback);
         sendButton = findViewById(R.id.btn_Send);
+        feedbackDisplayTextView = findViewById(R.id.textViewFeedbackDisplay);
 
         // Get Name from Intent
         userName = getIntent().getStringExtra("userName");
@@ -45,6 +49,8 @@ public class Feedback extends AppCompatActivity {
         sendButton.setOnClickListener(v -> {
             String feedbackText = feedbackEditText.getText().toString().trim();
             if (feedbackText.isEmpty()) {
+                feedbackDisplayTextView.setText("Please enter feedback.");
+                feedbackDisplayTextView.setVisibility(TextView.VISIBLE);
                 Toast.makeText(this, "Please enter feedback", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -59,12 +65,16 @@ public class Feedback extends AppCompatActivity {
             FeedbackData feedbackData = new FeedbackData(name, feedback);
             feedbackRef.child(feedbackId).setValue(feedbackData)
                     .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(this, "Feedback sent!", Toast.LENGTH_SHORT).show();
+                        feedbackDisplayTextView.setText("Feedback sent!");
+                        feedbackDisplayTextView.setVisibility(TextView.VISIBLE);
                         feedbackEditText.setText("");
+                        Toast.makeText(this, "Feedback sent!", Toast.LENGTH_SHORT).show();
                     })
-                    .addOnFailureListener(e ->
-                            Toast.makeText(this, "Failed to send feedback", Toast.LENGTH_SHORT).show()
-                    );
+                    .addOnFailureListener(e -> {
+                        feedbackDisplayTextView.setText("Failed to send feedback.");
+                        feedbackDisplayTextView.setVisibility(TextView.VISIBLE);
+                        Toast.makeText(this, "Failed to send feedback", Toast.LENGTH_SHORT).show();
+                    });
         }
     }
 }

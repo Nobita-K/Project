@@ -2,6 +2,7 @@ package com.example.alfareed;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,11 +43,16 @@ public class MenuScreenAdapter extends RecyclerView.Adapter<MenuScreenAdapter.Vi
         holder.tvPrice.setText("Rs " + item.getPrice());
         holder.tvDescription.setText(item.getDescription());
 
-        // Fetch image from SQLite using imageId
+        // Defensive image loading from SQLite using imageId
         if (item.getImageId() != null && !item.getImageId().isEmpty()) {
-            Bitmap bitmap = imageDatabaseHelper.getImageById(item.getImageId());
-            if (bitmap != null) {
-                holder.ivMenuImage.setImageBitmap(bitmap);
+            byte[] image = imageDatabaseHelper.getImage(item.getImageId());
+            if (image != null && image.length > 0) {
+                try {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+                    holder.ivMenuImage.setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    holder.ivMenuImage.setImageResource(R.drawable.placeholder_image);
+                }
             } else {
                 holder.ivMenuImage.setImageResource(R.drawable.placeholder_image);
             }

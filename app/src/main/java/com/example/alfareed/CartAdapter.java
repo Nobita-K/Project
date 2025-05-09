@@ -2,6 +2,7 @@ package com.example.alfareed;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +29,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private ImageDatabaseHelper imageDatabaseHelper;
     private String userId = "default_user"; // Replace with FirebaseAuth UID if available
 
+    // Listener for cart changes
+    private OnCartChangedListener cartChangedListener;
+
     public CartAdapter(Context context, List<MenuItem> cartItemList) {
         this.context = context;
         this.cartItemList = cartItemList;
         this.imageDatabaseHelper = new ImageDatabaseHelper(context);
+    }
+
+    public CartAdapter(Context context, List<MenuItem> cartItemList, OnCartChangedListener listener) {
+        this.context = context;
+        this.cartItemList = cartItemList;
+        this.imageDatabaseHelper = new ImageDatabaseHelper(context);
+        this.cartChangedListener = listener;
     }
 
     @NonNull
@@ -49,11 +60,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.tvPrice.setText("Rs " + item.getPrice());
         holder.tvQuantity.setText(String.valueOf(item.getQuantity() > 0 ? item.getQuantity() : 1));
 
-        // Image (from SQLite or placeholder)
+        // Defensive image loading from SQLite using imageId
         if (item.getImageId() != null && !item.getImageId().isEmpty()) {
-            Bitmap bitmap = imageDatabaseHelper.getImageById(item.getImageId());
-            if (bitmap != null) {
-                holder.ivImage.setImageBitmap(bitmap);
+            byte[] image = imageDatabaseHelper.getImage(item.getImageId());
+            if (image != null && image.length > 0) {
+                try {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+                    holder.ivImage.setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    holder.ivImage.setImageResource(R.drawable.placeholder_image);
+                }
             } else {
                 holder.ivImage.setImageResource(R.drawable.placeholder_image);
             }
@@ -68,6 +84,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             item.setQuantity(qty);
             updateItemInFirebase(item);
             holder.tvQuantity.setText(String.valueOf(qty));
+            if (cartChangedListener != null) cartChangedListener.onCartChanged();
         });
 
         // Minus button
@@ -78,6 +95,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 item.setQuantity(qty);
                 updateItemInFirebase(item);
                 holder.tvQuantity.setText(String.valueOf(qty));
+                if (cartChangedListener != null) cartChangedListener.onCartChanged();
             }
         });
 
@@ -89,6 +107,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 cartItemList.remove(pos);
                 notifyItemRemoved(pos);
                 Toast.makeText(context, "Item removed from cart", Toast.LENGTH_SHORT).show();
+                if (cartChangedListener != null) cartChangedListener.onCartChanged();
             }
         });
     }
@@ -124,20 +143,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 });
     }
 
-
     // Add this interface in CartAdapter
     public interface OnCartChangedListener {
         void onCartChanged();
-    }
-
-    // In your CartAdapter class:
-    private OnCartChangedListener cartChangedListener;
-
-    public CartAdapter(Context context, List<MenuItem> cartItemList, OnCartChangedListener listener) {
-        this.context = context;
-        this.cartItemList = cartItemList;
-        this.imageDatabaseHelper = new ImageDatabaseHelper(context);
-        this.cartChangedListener = listener;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

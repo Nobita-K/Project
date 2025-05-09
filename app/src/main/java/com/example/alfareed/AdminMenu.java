@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -24,7 +25,6 @@ import androidx.core.content.ContextCompat;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -73,11 +73,20 @@ public class AdminMenu extends AppCompatActivity {
     }
 
     private boolean checkStoragePermission() {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // For Android 13+ use READ_MEDIA_IMAGES
+            return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED;
+        } else {
+            return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+        }
     }
 
     private void requestStoragePermission() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_MEDIA_IMAGES}, STORAGE_PERMISSION_CODE);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        }
     }
 
     private void openGallery() {
@@ -111,15 +120,15 @@ public class AdminMenu extends AppCompatActivity {
 
         AlertDialog progressDialog = showProgressDialog("Adding Item", "Please wait while we add your item...");
 
+        // Get the image as a Bitmap, and insert using helper (which compresses/resizes)
         Bitmap bitmap = ((BitmapDrawable) itemImagePreview.getDrawable()).getBitmap();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] imageBytes = stream.toByteArray();
-
         String imageId = String.valueOf(System.currentTimeMillis());
-        if (!imageDatabaseHelper.insertImage(imageId, imageBytes)) {
+
+        // Use the helper's compressing insertImage method
+        boolean success = imageDatabaseHelper.insertImage(imageId, bitmap);
+        if (!success) {
             progressDialog.dismiss();
-            Toast.makeText(this, "Failed to save image in SQLite", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Image too large or failed to save! Please use a smaller image.", Toast.LENGTH_SHORT).show();
             return;
         }
 

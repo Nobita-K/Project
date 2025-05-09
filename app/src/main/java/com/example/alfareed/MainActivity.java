@@ -34,8 +34,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class MainActivity extends AppCompatActivity {
 
     // Admin credentials
-    private static final String ADMIN_EMAIL = "admin@gmail.com";
-    private static final String ADMIN_PASSWORD = "admin123";
+    private static final String ADMIN_EMAIL = "admin@ex.com";
+    private static final String ADMIN_PASSWORD = "123";
 
     EditText emailInput, passwordInput;
     Button btnLogin;

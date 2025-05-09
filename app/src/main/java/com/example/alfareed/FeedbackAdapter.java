@@ -35,7 +35,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Feedba
 
     @Override
     public int getItemCount() {
-        return feedbackList.size();
+        return feedbackList == null ? 0 : feedbackList.size();
     }
 
     public void setFeedbackList(List<FeedbackData> feedbackList) {
